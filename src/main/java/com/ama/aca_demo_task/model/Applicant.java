@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Data
@@ -31,6 +32,7 @@ public class Applicant {
     String email;
 
     @NotNull
+    @Pattern(regexp="(^$|[0-9]{11})")
     @Column(nullable = false)
     String phone;
 

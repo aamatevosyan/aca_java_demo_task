@@ -17,9 +17,26 @@ public class ApplicantServiceImpl implements ApplicantService {
     }
 
     @Override
-    public List<Applicant> getApplicants() {
+    public List<Applicant> getApplicants(String name, String email, Long courseId) {
         List<Applicant> applicants = new ArrayList<>();
-        applicantRepository.findAll().forEach(applicants::add);
+        if (name == null && email == null && courseId == null) {
+            applicantRepository.findAll().forEach(applicants::add);
+        } else if (name == null && email == null) {
+            applicants.addAll(applicantRepository.findByCourseId(courseId));
+        } else if (name == null && courseId == null) {
+            applicants.addAll(applicantRepository.findByEmail(email));
+        } else if (email == null && courseId == null) {
+            applicants.addAll(applicantRepository.findByName(name));
+        } else if (name == null) {
+            applicants.addAll(applicantRepository.findByEmailAndCourseId(email, courseId));
+        } else if (email == null) {
+            applicants.addAll(applicantRepository.findByNameAndCourseId(name, courseId));
+        } else if (courseId == null) {
+            applicants.addAll(applicantRepository.findByNameAndEmail(name, email));
+        } else {
+            applicants.addAll(applicantRepository.findByNameAndEmailAndCourseId(name, email, courseId));
+        }
+
         return applicants;
     }
 

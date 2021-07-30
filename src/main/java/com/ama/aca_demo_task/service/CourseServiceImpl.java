@@ -17,9 +17,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCourses() {
+    public List<Course> getCourses(String name) {
         List<Course> courses = new ArrayList<>();
-        courseRepository.findAll().forEach(courses::add);
+        if (name == null) {
+            courseRepository.findAll().forEach(courses::add);
+        } else {
+            courses.addAll(courseRepository.findByNameIgnoreCaseContaining(name));
+        }
+
         return courses;
     }
 

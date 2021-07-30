@@ -5,7 +5,7 @@ import com.ama.aca_demo_task.model.Applicant;
 import java.util.List;
 
 public interface ApplicantService {
-    List<Applicant> getApplicants();
+    List<Applicant> getApplicants(String name, String email, Long courseId);
 
     Applicant getApplicantById(Long id);
 

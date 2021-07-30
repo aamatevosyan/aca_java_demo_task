@@ -20,8 +20,8 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = courseService.getCourses();
+    public ResponseEntity<List<Course>> getAllCourses(@RequestParam(value = "name", required = false) String name) {
+        List<Course> courses = courseService.getCourses(name);
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 

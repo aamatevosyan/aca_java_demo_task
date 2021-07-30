@@ -5,7 +5,7 @@ import com.ama.aca_demo_task.model.Course;
 import java.util.List;
 
 public interface CourseService {
-    List<Course> getCourses();
+    List<Course> getCourses(String name);
 
     Course getCourseById(Long id);
 

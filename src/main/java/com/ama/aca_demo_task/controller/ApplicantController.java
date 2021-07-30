@@ -20,8 +20,12 @@ public class ApplicantController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Applicant>> getAllApplicants() {
-        List<Applicant> applicants = applicantService.getApplicants();
+    public ResponseEntity<List<Applicant>> getAllApplicants(
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "course_id", required = false) Long courseId
+    ) {
+        List<Applicant> applicants = applicantService.getApplicants(name, email, courseId);
         return new ResponseEntity<>(applicants, HttpStatus.OK);
     }
 
