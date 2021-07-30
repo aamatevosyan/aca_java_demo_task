@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -48,5 +49,10 @@ public class CourseController {
     public ResponseEntity<Course> deleteCourse(@PathVariable("courseId") Long courseId) {
         courseService.deleteCourse(courseId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping({"/{courseId}/certificates"})
+    public void getCertificates(@PathVariable("courseId") Long courseId, HttpServletResponse response) {
+        courseService.getCertificates(courseId, response);
     }
 }

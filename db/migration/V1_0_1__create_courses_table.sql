@@ -8,7 +8,7 @@ create table courses
     start_date   timestamp   not null,
     end_date     timestamp   not null,
     teacher_name varchar(40),
-    description  text
+    description  text not null,
 );
 
 alter table courses

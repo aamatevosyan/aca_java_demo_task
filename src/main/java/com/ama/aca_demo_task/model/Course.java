@@ -1,5 +1,6 @@
 package com.ama.aca_demo_task.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,6 +39,12 @@ public class Course {
     @NotNull
     String teacherName;
 
-    @Column
+    @Column(nullable = false)
+    @NotNull
     String description;
+
+    @ApiModelProperty(hidden = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "course_id")
+    List<Applicant> applicants;
 }
